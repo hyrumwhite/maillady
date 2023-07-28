@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import UrlInput from "./components/UrlInput.vue";
-import TabSubNavigation from "./components/TabSubNavigation.vue";
-import CallTabs from "./components/CallTabs.vue";
+import UrlInput from "@/components/UrlInput.vue";
+import TabSubNavigation from "@/components/TabSubNavigation.vue";
+import CallTabs from "@/components/CallTabs.vue";
 </script>
 
 <template>
@@ -12,13 +12,15 @@ import CallTabs from "./components/CallTabs.vue";
 			</select>
 			<button class="p-2 hover:bg-white/10">+</button>
 		</div>
-		<div class="flex px-2 gap-2">
-			<UrlInput />
+		<div class="p-2 pt-0 flex flex-col gap-3">
+			<div class="flex gap-2">
+				<UrlInput />
+			</div>
+			<div class="flex flex-col px-2">
+				<TabSubNavigation />
+			</div>
+			<CallTabs />
 		</div>
-		<div class="flex flex-col px-2">
-			<TabSubNavigation />
-		</div>
-		<CallTabs />
 	</div>
 </template>
 

@@ -3,9 +3,9 @@ import { storeToRefs } from "pinia";
 import { computed } from "vue";
 import { useWorkspaceStore } from "../composables/useWorkspace";
 const { currentTab } = storeToRefs(useWorkspaceStore());
-import CallHeaders from "./CallHeaders.vue";
-import CallPayload from "./CallPayload.vue";
-import CallResponse from "./CallResponse.vue";
+import CallHeaders from "@/components/CallHeaders.vue";
+import CallPayload from "@/components/CallPayload.vue";
+import CallResponse from "@/components/CallResponse.vue";
 const currentComponent = computed(() => {
 	if (currentTab.value.subview === "headers") {
 		return CallHeaders;
