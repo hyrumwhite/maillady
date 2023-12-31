@@ -6,13 +6,7 @@ import { storeToRefs } from "pinia";
 const workspaceStore = useWorkspaceStore();
 const { currentTab } = storeToRefs(workspaceStore);
 const headerItems = computed(() => {
-	const headerItems = [];
-	for (const header of currentTab.value.headers) {
-		for (const key of Object.keys(header)) {
-			headerItems.push({ key, value: header[key] });
-		}
-	}
-	return headerItems;
+	return [...currentTab.value.headers];
 });
 </script>
 <template>

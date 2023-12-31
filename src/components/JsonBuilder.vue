@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref } from "vue";
+import { watch, ref, toRef } from "vue";
 import AppInput from "./AppInput.vue";
 
 type Literal = boolean | string | number;
@@ -10,14 +10,17 @@ type JsonItem = {
 interface JsonBuilderProps {
 	items: JsonItem[];
 }
-const props = defineProps<JsonBuilderProps>();
+const props = withDefaults(defineProps<JsonBuilderProps>(), {
+	items: () => [],
+});
 const emit = defineEmits(["update"]);
 
 const localItems = ref<JsonItem[]>([]);
 watch(
-	props.items,
+	() => props.items,
 	() => {
-		localItems.value = structuredClone(props.items);
+		console.log([...props.items]);
+		localItems.value = [...props.items];
 	},
 	{ deep: true, immediate: true }
 );
@@ -28,11 +31,9 @@ const addRow = (index: number) => {
 };
 
 const removeRow = (index: number) => localItems.value.splice(index, 1);
-const test = ref("asdf");
 </script>
 <template>
 	<div class="px-2">
-		<AppInput v-model="test" /> {{ test }}
 		<table>
 			<thead>
 				<tr>
@@ -41,8 +42,18 @@ const test = ref("asdf");
 			</thead>
 			<tbody>
 				<tr v-for="(item, index) of localItems" :key="index">
-					<td><input v-model="item.key" @focus="addRow(index)" /></td>
-					<td><input v-model="item.value" @focus="addRow(index)" /></td>
+					<td
+						><input
+							class="text-black"
+							v-model="item.key"
+							@focus="addRow(index)"
+					/></td>
+					<td
+						><input
+							class="text-black"
+							v-model="item.value"
+							@focus="addRow(index)"
+					/></td>
 					<td><button @click="removeRow(index)">🗑</button></td>
 				</tr>
 			</tbody>

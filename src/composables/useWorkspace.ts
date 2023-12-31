@@ -22,7 +22,7 @@ const createTab = (url: string): Tab => ({
 	url,
 	subview: "payload",
 	method: "GET",
-	headers: [{ key: "", value: "" }],
+	headers: [{ key: "Content-Type", value: "application/json" }],
 	payload: {
 		contentType: "application/json",
 		body: "",
